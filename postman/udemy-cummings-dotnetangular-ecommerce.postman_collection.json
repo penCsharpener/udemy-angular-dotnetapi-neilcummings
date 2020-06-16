@@ -1,0 +1,21 @@
+{
+	"info": {
+		"_postman_id": "c2af6ff1-926d-4889-8c64-a50206f20d40",
+		"name": "udemy-cummings-dotnetangular-ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "weather",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
