@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Udemy.Skinet.Api.Data;
+using Udemy.Skinet.Infrastructure.Data;
 
 namespace Udemy.Skinet.Api {
     public class Startup {

@@ -10,6 +10,11 @@ all from the root folder of the project
 `dotnet sln add ./src/Udemy.Skinet.Api`
 `dotnet sln list`
 
+`dotnet new classlib -o src/Udemy.Skinet.Core`
+`dotnet new classlib -o src/Udemy.Skinet.Infrastructure`
+`dotnet sln add ./src/Udemy.Skinet.Core`
+`dotnet sln add ./src/Udemy.Skinet.Infrastructure`
+
 ## EF Core
 
 in Visual Studio 2019 Package Mananger Console

@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Udemy.Skinet.Api.Data;
-using Udemy.Skinet.Api.Entities;
+using Udemy.Skinet.Core.Entities;
+using Udemy.Skinet.Infrastructure.Data;
 
 namespace Udemy.Skinet.Api.Controllers {
     [Route("api/[controller]")]

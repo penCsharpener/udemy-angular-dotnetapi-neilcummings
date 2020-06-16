@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Udemy.Skinet.Api.Data;
+using Udemy.Skinet.Infrastructure.Data;
 
-namespace Udemy.Skinet.Api.Data.Migrations
+namespace Udemy.Skinet.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
     partial class StoreContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace Udemy.Skinet.Api.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.5");
 
-            modelBuilder.Entity("Udemy.Skinet.Api.Entities.Product", b =>
+            modelBuilder.Entity("Udemy.Skinet.Core.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

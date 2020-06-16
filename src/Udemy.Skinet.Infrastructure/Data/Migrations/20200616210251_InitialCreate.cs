@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Udemy.Skinet.Api.Data.Migrations
+namespace Udemy.Skinet.Infrastructure.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {

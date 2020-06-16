@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Udemy.Skinet.Api.Entities;
+using Udemy.Skinet.Core.Entities;
 
-namespace Udemy.Skinet.Api.Data {
+namespace Udemy.Skinet.Infrastructure.Data {
     public class StoreContext : DbContext {
         public StoreContext(DbContextOptions<StoreContext> options) : base(options) {
 

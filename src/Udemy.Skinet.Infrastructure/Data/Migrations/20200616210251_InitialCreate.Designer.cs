@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Udemy.Skinet.Api.Data;
+using Udemy.Skinet.Infrastructure.Data;
 
-namespace Udemy.Skinet.Api.Data.Migrations
+namespace Udemy.Skinet.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20200616203239_InitialCreate")]
+    [Migration("20200616210251_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,7 +17,7 @@ namespace Udemy.Skinet.Api.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.5");
 
-            modelBuilder.Entity("Udemy.Skinet.Api.Entities.Product", b =>
+            modelBuilder.Entity("Udemy.Skinet.Core.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
