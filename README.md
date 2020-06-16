@@ -10,3 +10,8 @@ all from the root folder of the project
 `dotnet sln add ./src/Udemy.Skinet.Api`
 `dotnet sln list`
 
+## EF Core
+
+in Visual Studio 2019 Package Mananger Console
+
+`Add-Migration InitialCreate -o Data/Migrations`
