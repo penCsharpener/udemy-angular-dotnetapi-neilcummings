@@ -1,20 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Udemy.Skinet.Api.Data;
+using Udemy.Skinet.Api.Entities;
 
 namespace Udemy.Skinet.Api.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase {
+        private readonly StoreContext _context;
+
+        public ProductsController(StoreContext context) {
+            _context = context;
+        }
+
         // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<string> GetProducts() {
-            return new string[] { "product1", "product2" };
+        public async Task<ActionResult<List<Product>>> GetProducts() {
+            var products = await _context.Products.ToListAsync();
+            return Ok(products);
         }
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public string GetProduct(int id) {
-            return "single product";
+        public async Task<ActionResult<Product>> GetProduct(int id) {
+            var product = await _context.Products.FindAsync(id);
+            return Ok(product);
         }
 
         // POST api/<ProductsController>
