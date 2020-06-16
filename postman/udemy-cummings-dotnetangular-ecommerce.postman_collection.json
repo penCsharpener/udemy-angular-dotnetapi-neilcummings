@@ -6,12 +6,19 @@
 	},
 	"item": [
 		{
-			"name": "weather",
+			"name": "get product",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "{{url}}api/products/1324",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"products",
+						"1324"
+					]
 				}
 			},
 			"response": []
