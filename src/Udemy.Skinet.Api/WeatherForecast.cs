@@ -1,9 +1,7 @@
 using System;
 
-namespace Udemy.Skinet.Api
-{
-    public class WeatherForecast
-    {
+namespace Udemy.Skinet.Api {
+    public class WeatherForecast {
         public DateTime Date { get; set; }
 
         public int TemperatureC { get; set; }
