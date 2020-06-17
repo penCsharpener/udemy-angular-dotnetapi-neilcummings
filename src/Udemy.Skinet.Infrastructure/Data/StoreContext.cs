@@ -8,5 +8,7 @@ namespace Udemy.Skinet.Infrastructure.Data {
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
     }
 }
