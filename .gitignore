@@ -351,3 +351,4 @@ MigrationBackup/
 src/Udemy.Skinet.Api/Properties/launchSettings*.json
 .vscode/*
 src/Udemy.Skinet.Api/skinet.db*
+StudentAssets
