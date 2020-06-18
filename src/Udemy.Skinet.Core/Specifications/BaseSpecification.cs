@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace Udemy.Skinet.Core.Specifications {
-    public class BaseSpecifications<T> : ISpecifications<T> {
-        public BaseSpecifications(Expression<Func<T, bool>> criteria) {
+    public class BaseSpecification<T> : ISpecification<T> {
+        public BaseSpecification(Expression<Func<T, bool>> criteria) {
             Criteria = criteria;
         }
 
