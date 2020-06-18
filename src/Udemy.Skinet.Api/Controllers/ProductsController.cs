@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Udemy.Skinet.Core.Entities;
 using Udemy.Skinet.Core.Interfaces;
+using Udemy.Skinet.Core.Specifications;
 
 namespace Udemy.Skinet.Api.Controllers {
     [Route("api/[controller]")]
@@ -23,7 +24,7 @@ namespace Udemy.Skinet.Api.Controllers {
         // GET: api/<ProductsController>
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts() {
-            var products = await _productsRepo.ListAllAsync();
+            var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification());
             return Ok(products);
         }
 
