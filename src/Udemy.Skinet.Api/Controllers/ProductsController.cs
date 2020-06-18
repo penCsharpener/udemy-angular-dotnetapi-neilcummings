@@ -28,6 +28,18 @@ namespace Udemy.Skinet.Api.Controllers {
             return Ok(product);
         }
 
+        [HttpGet("brands")]
+        public async Task<ActionResult<ProductBrand>> GetProductBrands() {
+            var brands = await _repo.GetProductBrandsAsync();
+            return Ok(brands);
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<ProductType>> GetProductTypes() {
+            var types = await _repo.GetProductTypesAsync();
+            return Ok(types);
+        }
+
         // POST api/<ProductsController>
         [HttpPost]
         public void Post([FromBody] string value) {
