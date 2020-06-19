@@ -9,12 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Skinet.Api", "src\Ude
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1EEFD52F-5A26-42EC-92D1-89370B0014FF}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udemy.Skinet.Core", "src\Udemy.Skinet.Core\Udemy.Skinet.Core.csproj", "{3D3CD63A-959A-4082-BE76-1A3BB7ED2071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Skinet.Core", "src\Udemy.Skinet.Core\Udemy.Skinet.Core.csproj", "{3D3CD63A-959A-4082-BE76-1A3BB7ED2071}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Udemy.Skinet.Infrastructure", "src\Udemy.Skinet.Infrastructure\Udemy.Skinet.Infrastructure.csproj", "{1A3027BE-AA66-4A5E-8935-BA80A8CC3083}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Udemy.Skinet.Infrastructure", "src\Udemy.Skinet.Infrastructure\Udemy.Skinet.Infrastructure.csproj", "{1A3027BE-AA66-4A5E-8935-BA80A8CC3083}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

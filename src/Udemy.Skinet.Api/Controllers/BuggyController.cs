@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Infrastructure.Data;
 
 namespace Udemy.Skinet.Api.Controllers {
@@ -14,7 +16,7 @@ namespace Udemy.Skinet.Api.Controllers {
             var thing = _context.Products.Find(42);
 
             if (thing == null) {
-                return NotFound();
+                return NotFound(new ApiResponse(HttpStatusCode.NotFound));
             }
 
             return Ok();
@@ -31,7 +33,7 @@ namespace Udemy.Skinet.Api.Controllers {
 
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest() {
-            return BadRequest();
+            return BadRequest(new ApiResponse(HttpStatusCode.BadRequest));
         }
 
         [HttpGet("badrequest/{id}")]
