@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Udemy.Skinet.Api.Dtos;
+using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Core.Entities;
 using Udemy.Skinet.Core.Interfaces;
 using Udemy.Skinet.Core.Specifications;
@@ -32,9 +34,15 @@ namespace Udemy.Skinet.Api.Controllers {
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id) {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productsRepo.GetEntityWithSpec(spec);
+
+            if (product == null) {
+                return NotFound(new ApiResponse(404));
+            }
 
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
