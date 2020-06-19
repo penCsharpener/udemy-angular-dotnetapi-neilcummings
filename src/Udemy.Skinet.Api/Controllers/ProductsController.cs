@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Udemy.Skinet.Api.Dtos;
 using Udemy.Skinet.Core.Entities;
 using Udemy.Skinet.Core.Interfaces;
 using Udemy.Skinet.Core.Specifications;
@@ -23,17 +25,36 @@ namespace Udemy.Skinet.Api.Controllers {
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts() {
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts() {
             var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification());
-            return Ok(products);
+            return products.Select(product => {
+                return new ProductToReturnDto {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    PictureUrl = product.PictureUrl,
+                    Price = product.Price,
+                    ProductBrand = product.ProductBrand.Name,
+                    ProductType = product.ProductType.Name
+                };
+            }).ToList();
         }
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id) {
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id) {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productsRepo.GetEntityWithSpec(spec);
-            return Ok(product);
+
+            return new ProductToReturnDto {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                PictureUrl = product.PictureUrl,
+                Price = product.Price,
+                ProductBrand = product.ProductBrand.Name,
+                ProductType = product.ProductType.Name
+            };
         }
 
         [HttpGet("brands")]
