@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Udemy.Skinet.Api.Dtos;
 using Udemy.Skinet.Core.Entities;
@@ -27,24 +26,12 @@ namespace Udemy.Skinet.Api.Controllers {
             _mapper = mapper;
         }
 
-        // GET: api/<ProductsController>
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts() {
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts() {
             var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification());
-            return products.Select(product => {
-                return new ProductToReturnDto {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    PictureUrl = product.PictureUrl,
-                    Price = product.Price,
-                    ProductBrand = product.ProductBrand.Name,
-                    ProductType = product.ProductType.Name
-                };
-            }).ToList();
+            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
 
-        // GET api/<ProductsController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id) {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
@@ -65,17 +52,14 @@ namespace Udemy.Skinet.Api.Controllers {
             return Ok(types);
         }
 
-        // POST api/<ProductsController>
         [HttpPost]
         public void Post([FromBody] string value) {
         }
 
-        // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value) {
         }
 
-        // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id) {
         }
