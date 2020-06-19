@@ -8,9 +8,8 @@ using Udemy.Skinet.Core.Interfaces;
 using Udemy.Skinet.Core.Specifications;
 
 namespace Udemy.Skinet.Api.Controllers {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase {
+
+    public class ProductsController : BaseApiController {
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandsRepo;
         private readonly IGenericRepository<ProductType> _productTypesRepo;
