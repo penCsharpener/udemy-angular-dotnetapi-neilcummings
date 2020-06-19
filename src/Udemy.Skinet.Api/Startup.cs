@@ -35,6 +35,7 @@ namespace Udemy.Skinet.Api {
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
