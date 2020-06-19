@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,13 +15,16 @@ namespace Udemy.Skinet.Api.Controllers {
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandsRepo;
         private readonly IGenericRepository<ProductType> _productTypesRepo;
+        private readonly IMapper _mapper;
 
         public ProductsController(IGenericRepository<Product> productsRepo,
                                   IGenericRepository<ProductBrand> productBrandsRepo,
-                                  IGenericRepository<ProductType> productTypesRepo) {
+                                  IGenericRepository<ProductType> productTypesRepo,
+                                  IMapper mapper) {
             _productsRepo = productsRepo;
             _productBrandsRepo = productBrandsRepo;
             _productTypesRepo = productTypesRepo;
+            _mapper = mapper;
         }
 
         // GET: api/<ProductsController>
@@ -46,15 +50,7 @@ namespace Udemy.Skinet.Api.Controllers {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productsRepo.GetEntityWithSpec(spec);
 
-            return new ProductToReturnDto {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                PictureUrl = product.PictureUrl,
-                Price = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
-            };
+            return _mapper.Map<Product, ProductToReturnDto>(product);
         }
 
         [HttpGet("brands")]
