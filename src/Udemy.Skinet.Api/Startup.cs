@@ -32,6 +32,8 @@ namespace Udemy.Skinet.Api {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
