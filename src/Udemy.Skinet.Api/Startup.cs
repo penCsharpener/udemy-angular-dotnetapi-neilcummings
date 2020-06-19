@@ -1,9 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Api.Helpers;
 using Udemy.Skinet.Api.Middleware;
 using Udemy.Skinet.Core.Interfaces;
@@ -24,6 +27,22 @@ namespace Udemy.Skinet.Api {
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+            // needs to be configured last after the above
+            services.Configure<ApiBehaviorOptions>(opt => {
+                opt.InvalidModelStateResponseFactory = actionContext => {
+                    var errors = actionContext.ModelState.Where(err => err.Value.Errors.Count > 0)
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x => x.ErrorMessage)
+                    .ToArray();
+
+                    var errorResponse = new ApiValidationErrorResponse {
+                        Errors = errors
+                    };
+
+                    return new BadRequestObjectResult(errorResponse);
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
