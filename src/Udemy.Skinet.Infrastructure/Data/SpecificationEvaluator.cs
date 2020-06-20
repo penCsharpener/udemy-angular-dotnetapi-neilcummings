@@ -20,6 +20,11 @@ namespace Udemy.Skinet.Infrastructure.Data {
                 query = query.OrderByDescending(spec.OrderByDescending);
             }
 
+            // needs to come after filtering and sorting or the result will be wrong
+            if (spec.IsPagingEnabled) {
+                query = query.Skip(spec.Skip).Take(spec.Take);
+            }
+
             query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
             return query;
         }
