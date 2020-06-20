@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Udemy.Skinet.Api.Dtos;
 using Udemy.Skinet.Api.Errors;
+using Udemy.Skinet.Api.Helpers;
 using Udemy.Skinet.Core.Entities;
 using Udemy.Skinet.Core.Interfaces;
 using Udemy.Skinet.Core.Specifications;
@@ -30,7 +31,14 @@ namespace Udemy.Skinet.Api.Controllers {
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams) {
             var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification(productParams));
-            return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+
+            var countSpec = new ProductWithFiltersForCountSpecification(productParams);
+
+            var totalItems = await _productsRepo.CountAsync(countSpec);
+
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+
+            return Ok(new Pagination<ProductToReturnDto>(productParams.PageIndex, productParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
