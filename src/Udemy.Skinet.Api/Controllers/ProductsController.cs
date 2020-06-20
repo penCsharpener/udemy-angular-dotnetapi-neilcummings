@@ -8,6 +8,7 @@ using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Core.Entities;
 using Udemy.Skinet.Core.Interfaces;
 using Udemy.Skinet.Core.Specifications;
+using Udemy.Skinet.Core.Specifications.Params;
 
 namespace Udemy.Skinet.Api.Controllers {
     public class ProductsController : BaseApiController {
@@ -27,8 +28,8 @@ namespace Udemy.Skinet.Api.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort, int? brandId, int? typeId) {
-            var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId));
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams) {
+            var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification(productParams));
             return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
 
