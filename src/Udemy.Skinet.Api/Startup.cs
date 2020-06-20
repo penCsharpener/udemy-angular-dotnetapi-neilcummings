@@ -11,6 +11,7 @@ using Udemy.Skinet.Infrastructure.Data;
 
 namespace Udemy.Skinet.Api {
     public class Startup {
+        private const string CorsPolicy = "CorsPolicy";
         private readonly IConfiguration _config;
 
         public Startup(IConfiguration configuration) {
@@ -25,6 +26,11 @@ namespace Udemy.Skinet.Api {
 
             services.AddApplicationServices();
             services.AddSwaggerServices();
+            services.AddCors(opt => {
+                opt.AddPolicy(CorsPolicy, policy => {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +43,8 @@ namespace Udemy.Skinet.Api {
 
             app.UseRouting();
             app.UseStaticFiles();
+
+            app.UseCors(CorsPolicy);
 
             app.UseAuthorization();
             app.UseSwaggerDocumenation();
