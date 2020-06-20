@@ -27,8 +27,8 @@ namespace Udemy.Skinet.Api.Controllers {
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort) {
-            var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification(sort));
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort, int? brandId, int? typeId) {
+            var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId));
             return Ok(_mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
 
