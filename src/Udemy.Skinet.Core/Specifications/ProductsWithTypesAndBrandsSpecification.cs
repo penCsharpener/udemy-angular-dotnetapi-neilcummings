@@ -33,7 +33,8 @@ namespace Udemy.Skinet.Core.Specifications {
         }
 
         public static Expression<Func<Product, bool>> GetExpression(ProductSpecParams productParams) {
-            return x => (!productParams.BrandId.HasValue || x.ProductBrandId.Equals(productParams.BrandId.Value))
+            return x => (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search))
+                     && (!productParams.BrandId.HasValue || x.ProductBrandId.Equals(productParams.BrandId.Value))
                      && (!productParams.TypeId.HasValue || x.ProductTypeId.Equals(productParams.TypeId.Value));
         }
     }
