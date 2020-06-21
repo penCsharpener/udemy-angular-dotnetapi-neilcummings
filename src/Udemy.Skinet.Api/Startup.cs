@@ -28,7 +28,13 @@ namespace Udemy.Skinet.Api {
             services.AddSwaggerServices();
             services.AddCors(opt => {
                 opt.AddPolicy(CorsPolicy, policy => {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                    policy
+#if DEBUG
+                    .AllowAnyOrigin()
+#else
+                    .WithOrigins("https://localhost:4200")
+#endif
+                    .AllowAnyHeader().AllowAnyMethod();
                 });
             });
         }
