@@ -29,6 +29,7 @@ namespace Udemy.Skinet.Api.Controllers {
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(Pagination<ProductToReturnDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams productParams) {
             var products = await _productsRepo.ListAsync(new ProductsWithTypesAndBrandsSpecification(productParams));
 
@@ -56,12 +57,14 @@ namespace Udemy.Skinet.Api.Controllers {
         }
 
         [HttpGet("brands")]
+        [ProducesResponseType(typeof(IReadOnlyList<ProductToReturnDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<ProductBrand>> GetProductBrands() {
             var brands = await _productBrandsRepo.ListAllAsync();
             return Ok(brands);
         }
 
         [HttpGet("types")]
+        [ProducesResponseType(typeof(IReadOnlyList<ProductToReturnDto>), StatusCodes.Status200OK)]
         public async Task<ActionResult<ProductType>> GetProductTypes() {
             var types = await _productTypesRepo.ListAllAsync();
             return Ok(types);
