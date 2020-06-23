@@ -13,6 +13,8 @@ export class ShopComponent implements OnInit {
   products: IProduct[];
   brands: IBrand[];
   productTypes: IProductType[];
+  brandIdSelected: number;
+  typeIdSelected: number;
 
   constructor(private shopService: ShopService) {}
 
@@ -23,20 +25,22 @@ export class ShopComponent implements OnInit {
   }
 
   getProducts() {
-    this.shopService.getProducts().subscribe(
-      (response) => {
-        this.products = response.data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.shopService
+      .getProducts(this.brandIdSelected, this.typeIdSelected)
+      .subscribe(
+        (response) => {
+          this.products = response.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   getBrands() {
     this.shopService.getBrands().subscribe(
       (response) => {
-        this.brands = response;
+        this.brands = [{ id: 0, name: 'All' }, ...response];
       },
       (error) => {
         console.log(error);
@@ -47,11 +51,21 @@ export class ShopComponent implements OnInit {
   getProductTypes() {
     this.shopService.getTypes().subscribe(
       (response) => {
-        this.productTypes = response;
+        this.productTypes = [{ id: 0, name: 'All' }, ...response];
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  onBrandSelected(brandId: number) {
+    this.brandIdSelected = brandId;
+    this.getProducts();
+  }
+
+  onTypeSelected(typeId: number) {
+    this.typeIdSelected = typeId;
+    this.getProductTypes();
   }
 }
