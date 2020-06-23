@@ -16,7 +16,6 @@ export class ShopComponent implements OnInit {
   productTypes: IProductType[];
   shopParams = new ShopParams();
   totalCount: number;
-  paginationRange: string;
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Low to High', value: 'priceAsc' },
@@ -29,7 +28,6 @@ export class ShopComponent implements OnInit {
     this.getProducts();
     this.getBrands();
     this.getProductTypes();
-    this.calculatePaginationRange();
   }
 
   getProducts() {
@@ -85,17 +83,6 @@ export class ShopComponent implements OnInit {
 
   onPageChanged(event: any) {
     this.shopParams.pageNumber = event.page;
-    this.calculatePaginationRange();
     this.getProducts();
-  }
-
-  private calculatePaginationRange() {
-    const startPage =
-      (this.shopParams.pageNumber - 1) * this.shopParams.pageSize + 1;
-    const endPage =
-      this.shopParams.pageNumber * this.shopParams.pageSize > this.totalCount
-        ? this.totalCount
-        : this.shopParams.pageNumber * this.shopParams.pageSize;
-    this.paginationRange = `${startPage} - ${endPage}`;
   }
 }
