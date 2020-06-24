@@ -5,9 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { ShopModule } from './shop/shop.module';
 import { HomeModule } from './home/home.module';
-import { ErrorInterceptorInterceptor } from './core/interceptors/error-interceptor.interceptor';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +21,7 @@ import { ErrorInterceptorInterceptor } from './core/interceptors/error-intercept
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptorInterceptor,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

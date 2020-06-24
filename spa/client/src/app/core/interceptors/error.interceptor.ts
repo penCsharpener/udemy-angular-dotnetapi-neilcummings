@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class ErrorInterceptorInterceptor implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
   intercept(
