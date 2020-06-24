@@ -1,3 +1,4 @@
 <pagination [boundaryLinks]="true" [totalItems]="totalCount" (pageChanged)="onPagerChange($event)"
     [itemsPerPage]="pageSize" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    <!-- setting [totalItems] also causes pageChanged event to be fired -> leads to duplicate Api requests -->
 </pagination>
