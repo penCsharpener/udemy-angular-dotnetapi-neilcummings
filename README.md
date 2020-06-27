@@ -36,3 +36,8 @@ telnet localhost 6379
 
 then [Enter]; ping
 to exit: quit
+
+```
+redis-cli KEYS '*'
+redis-cli GET <keyvalue>
+```
