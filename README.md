@@ -21,3 +21,18 @@ in Visual Studio 2019 Package Mananger Console
 
 `Add-Migration InitialCreate -o Data/Migrations`
 `Update-Database`
+
+## Redis via Docker
+
+```
+docker run --name local-redis -p 6379:6379 -p 6380:6380 -d redis redis-server --appendonly yes
+```
+
+to test and ping the server on Windows
+
+```
+telnet localhost 6379
+```
+
+then [Enter]; ping
+to exit: quit
