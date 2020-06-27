@@ -8,6 +8,7 @@ using Udemy.Skinet.Api.Extensions;
 using Udemy.Skinet.Api.Helpers;
 using Udemy.Skinet.Api.Middleware;
 using Udemy.Skinet.Infrastructure.Data;
+using Udemy.Skinet.Infrastructure.Extensions;
 
 namespace Udemy.Skinet.Api {
     public class Startup {
@@ -23,6 +24,8 @@ namespace Udemy.Skinet.Api {
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+            services.AddRedis(_config);
 
             services.AddApplicationServices();
             services.AddSwaggerServices();
