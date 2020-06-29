@@ -9,10 +9,9 @@ import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
-import { OrderTotalsComponent } from './src/app/shared/components/order-totals/order-totals.component';
 
 @NgModule({
-  declarations: [AppComponent, OrderTotalsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
