@@ -10,6 +10,7 @@ namespace Udemy.Skinet.Infrastructure.Identity {
                 var user = new AppUser {
                     DisplayName = "Bob",
                     Email = "bob@test.com",
+                    UserName = "bob@test.com",
                     Address = new Address {
                         FirstName = "Bob",
                         LastName = "Bobbity",
@@ -20,7 +21,13 @@ namespace Udemy.Skinet.Infrastructure.Identity {
                     }
                 };
 
-                await userManager.CreateAsync(user, "Pa$$w0rd");
+                var result = await userManager.CreateAsync(user, "Pa$$w0rd");
+
+                if (!result.Succeeded) {
+                    foreach (var error in result.Errors) {
+                        System.Console.WriteLine($"{error.Code} {error.Description}");
+                    }
+                }
             }
         }
     }
