@@ -25,12 +25,12 @@ namespace Udemy.Skinet.Api {
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-
             services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
 
             services.AddRedis(_config);
 
             services.AddApplicationServices();
+            services.AddIdentityServices();
             services.AddSwaggerServices();
             services.AddCors(opt => {
                 opt.AddPolicy(CorsPolicy, policy => {
