@@ -30,7 +30,7 @@ namespace Udemy.Skinet.Api {
             services.AddRedis(_config);
 
             services.AddApplicationServices();
-            services.AddIdentityServices();
+            services.AddIdentityServices(_config);
             services.AddSwaggerServices();
             services.AddCors(opt => {
                 opt.AddPolicy(CorsPolicy, policy => {
@@ -58,7 +58,9 @@ namespace Udemy.Skinet.Api {
 
             app.UseCors(CorsPolicy);
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSwaggerDocumenation();
 
             app.UseEndpoints(endpoints => {
