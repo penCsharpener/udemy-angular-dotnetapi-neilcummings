@@ -9,7 +9,7 @@ namespace Udemy.Skinet.Api.Extensions {
             var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, builder.Services);
             builder.AddEntityFrameworkStores<AppIdentityDbContext>();
-            builder.AddSignInManager<AppUser>();
+            builder.AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication();
 
