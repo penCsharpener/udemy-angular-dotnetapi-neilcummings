@@ -22,6 +22,12 @@ in Visual Studio 2019 Package Mananger Console
 `Add-Migration InitialCreate -o Data/Migrations`
 `Update-Database`
 
+### Identity Migrations
+
+`Add-Migration IdentityInitial -o Identity/Migrations -c AppIdentityDbContext`
+
+
+
 ## Redis via Docker
 
 ```
@@ -41,3 +47,4 @@ to exit: quit
 redis-cli KEYS '*'
 redis-cli GET <keyvalue>
 ```
+
