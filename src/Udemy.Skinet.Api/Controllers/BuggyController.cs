@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Infrastructure.Data;
@@ -9,6 +10,12 @@ namespace Udemy.Skinet.Api.Controllers {
 
         public BuggyController(StoreContext context) {
             _context = context;
+        }
+
+        [HttpGet("testauth")]
+        [Authorize]
+        public ActionResult<string> GetSecretText() {
+            return "secret stuff";
         }
 
         [HttpGet("notfound")]

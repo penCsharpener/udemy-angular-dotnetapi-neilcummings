@@ -4,15 +4,18 @@ using System.Threading.Tasks;
 using Udemy.Skinet.Api.Dtos;
 using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Core.Entities.Identity;
+using Udemy.Skinet.Core.Interfaces;
 
 namespace Udemy.Skinet.Api.Controllers {
     public class AccountController : BaseApiController {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) {
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService) {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -31,7 +34,7 @@ namespace Udemy.Skinet.Api.Controllers {
 
             return new UserDto {
                 Email = user.Email,
-                Token = "this is the token",
+                Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
         }
@@ -52,7 +55,7 @@ namespace Udemy.Skinet.Api.Controllers {
 
             return new UserDto {
                 DisplayName = user.DisplayName,
-                Token = "this will be a token",
+                Token = _tokenService.CreateToken(user),
                 Email = user.Email
             };
         }

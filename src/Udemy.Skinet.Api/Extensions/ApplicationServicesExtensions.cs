@@ -4,10 +4,12 @@ using System.Linq;
 using Udemy.Skinet.Api.Errors;
 using Udemy.Skinet.Core.Interfaces;
 using Udemy.Skinet.Infrastructure.Data;
+using Udemy.Skinet.Infrastructure.Services;
 
 namespace Udemy.Skinet.Api.Extensions {
     public static class ApplicationServicesExtensions {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
