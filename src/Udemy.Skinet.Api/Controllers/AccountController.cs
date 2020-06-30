@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Udemy.Skinet.Api.Dtos;
 using Udemy.Skinet.Api.Errors;
+using Udemy.Skinet.Api.Extensions;
 using Udemy.Skinet.Core.Entities.Identity;
 using Udemy.Skinet.Core.Interfaces;
 
@@ -66,9 +65,7 @@ namespace Udemy.Skinet.Api.Controllers {
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser() {
-            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
-
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
 
             return new UserDto {
                 DisplayName = user.DisplayName,
@@ -85,9 +82,7 @@ namespace Udemy.Skinet.Api.Controllers {
         [Authorize]
         [HttpGet("address")]
         public async Task<ActionResult<Address>> GetUserAddress() {
-            var email = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Email).Value;
-
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByUserByClaimsPrincipleWithAddressAsync(HttpContext.User);
 
             return user.Address;
         }
