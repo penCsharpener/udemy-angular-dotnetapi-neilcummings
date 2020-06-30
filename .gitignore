@@ -353,3 +353,4 @@ src/Udemy.Skinet.Api/Properties/launchSettings*.json
 src/Udemy.Skinet.Api/skinet.db*
 StudentAssets
 **/wwwroot/images/**/*.png
+src/Udemy.Skinet.Api/identity.db*
