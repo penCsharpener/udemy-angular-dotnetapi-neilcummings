@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Udemy.Skinet.Api.Dtos;
 using Udemy.Skinet.Core.Entities;
 using Udemy.Skinet.Core.Interfaces;
 
 namespace Udemy.Skinet.Api.Controllers {
     public class BasketController : BaseApiController {
         private readonly IBasketRepository _basketRepository;
+        private readonly IMapper _mapper;
 
-        public BasketController(IBasketRepository basketRepository) {
+        public BasketController(IBasketRepository basketRepository, IMapper mapper) {
             _basketRepository = basketRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -19,8 +23,8 @@ namespace Udemy.Skinet.Api.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasket basket) {
-            var updatedBasket = await _basketRepository.UpdateBasketAsync(basket);
+        public async Task<ActionResult<CustomerBasket>> UpdateBasket(CustomerBasketDto basket) {
+            var updatedBasket = await _basketRepository.UpdateBasketAsync(_mapper.Map<CustomerBasketDto, CustomerBasket>(basket));
 
             return Ok(updatedBasket);
         }
