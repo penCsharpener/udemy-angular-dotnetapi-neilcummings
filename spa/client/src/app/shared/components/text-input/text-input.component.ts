@@ -63,7 +63,9 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   }
 
   applyValidityClass(): string {
-    return this.isValidAndTouched()
+    return this.controlDir &&
+      this.controlDir.control &&
+      this.controlDir.control.touched
       ? !this.controlDir.control.valid
         ? 'is-invalid'
         : 'is-valid'
