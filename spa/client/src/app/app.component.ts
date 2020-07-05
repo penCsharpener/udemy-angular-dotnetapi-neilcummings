@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
-import { Console } from 'console';
 import { AccountService } from './account/account.service';
 
 @Component({
