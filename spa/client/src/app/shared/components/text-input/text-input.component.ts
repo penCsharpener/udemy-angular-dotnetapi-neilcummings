@@ -52,4 +52,21 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {}
+
+  isValidAndTouched(): boolean {
+    return (
+      this.controlDir &&
+      this.controlDir.control &&
+      this.controlDir.control.valid &&
+      this.controlDir.control.touched
+    );
+  }
+
+  applyValidityClass(): string {
+    return this.isValidAndTouched()
+      ? !this.controlDir.control.valid
+        ? 'is-invalid'
+        : 'is-valid'
+      : null;
+  }
 }
