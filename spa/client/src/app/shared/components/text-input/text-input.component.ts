@@ -57,8 +57,17 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
     return (
       this.controlDir &&
       this.controlDir.control &&
-      this.controlDir.control.valid &&
+      !this.controlDir.control.valid &&
       this.controlDir.control.touched
+    );
+  }
+
+  isValidAndDirty(): boolean {
+    return (
+      this.controlDir &&
+      this.controlDir.control &&
+      !this.controlDir.control.valid &&
+      this.controlDir.control.dirty
     );
   }
 
