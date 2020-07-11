@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Udemy.Skinet.Core.Entities.OrderAggregate {
     public class Order : BaseEntity {
+        public Order() { }
+
         public Order(IReadOnlyList<OrderItem> orderItems, string buyerEmail, Address shipToAddress, DeliveryMethod deliveryMethod, decimal subtotal) {
             BuyerEmail = buyerEmail;
             ShipToAddress = shipToAddress;
