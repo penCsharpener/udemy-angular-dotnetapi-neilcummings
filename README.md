@@ -19,7 +19,7 @@ all from the root folder of the project
 
 in Visual Studio 2019 Package Mananger Console
 
-`Add-Migration InitialCreate -o Data/Migrations`
+`Add-Migration InitialCreate -o Data/Migrations -c StoreContext`
 `Update-Database`
 
 ### Identity Migrations
