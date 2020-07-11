@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Udemy.Skinet.Core.Entities;
+using Udemy.Skinet.Core.Entities.OrderAggregate;
 
 namespace Udemy.Skinet.Infrastructure.Data {
     public class StoreContextSeed {
@@ -13,9 +14,7 @@ namespace Udemy.Skinet.Infrastructure.Data {
 
         public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory) {
             try {
-
                 if (Directory.Exists(SeedBasePath)) {
-
                     if (!context.ProductBrands.Any()) {
                         if (SeedFromFile<ProductBrand>("brands.json", out var entities)) {
                             await context.ProductBrands.AddRangeAsync(entities);
@@ -31,6 +30,12 @@ namespace Udemy.Skinet.Infrastructure.Data {
                     if (!context.Products.Any()) {
                         if (SeedFromFile<Product>("products.json", out var entities)) {
                             await context.Products.AddRangeAsync(entities);
+                        }
+                    }
+
+                    if (!context.DeliveryMethods.Any()) {
+                        if (SeedFromFile<DeliveryMethod>("delivery.json", out var entities)) {
+                            await context.DeliveryMethods.AddRangeAsync(entities);
                         }
                     }
 
